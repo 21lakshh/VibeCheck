@@ -5,6 +5,7 @@ import SpotifyService from '../lib/spotify';
 const SpotifyCallback = () => {
   const [status, setStatus] = useState('Processing...');
   const [error, setError] = useState(null);
+  const [debug, setDebug] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,6 +15,14 @@ const SpotifyCallback = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         const errorParam = urlParams.get('error');
+
+        // Store debug information
+        setDebug({
+          url: window.location.href,
+          code: code,
+          error: errorParam,
+          timestamp: new Date().toISOString()
+        });
 
         if (errorParam) {
           throw new Error(`Spotify authorization error: ${errorParam}`);
@@ -28,6 +37,10 @@ const SpotifyCallback = () => {
         // Exchange code for access token
         const tokens = await SpotifyService.getAccessToken(code);
         
+        if (!tokens || !tokens.access_token) {
+          throw new Error('Failed to receive access token from Spotify');
+        }
+
         // Store tokens
         SpotifyService.storeTokens(tokens);
 
@@ -36,6 +49,10 @@ const SpotifyCallback = () => {
         // Get user's Spotify profile
         const spotifyProfile = await SpotifyService.getUserProfile(tokens.access_token);
         
+        if (!spotifyProfile || !spotifyProfile.id) {
+          throw new Error('Failed to fetch Spotify profile');
+        }
+
         // Store Spotify profile data in localStorage for now
         localStorage.setItem('spotify_profile', JSON.stringify(spotifyProfile));
 
@@ -73,6 +90,12 @@ const SpotifyCallback = () => {
           {error ? (
             <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 mb-6">
               <p className="text-red-300 text-sm">{error}</p>
+              <div className="mt-4 p-2 bg-black/30 rounded text-xs text-left text-gray-400">
+                <p>Debug Information:</p>
+                <pre className="mt-1 overflow-x-auto">
+                  {JSON.stringify(debug, null, 2)}
+                </pre>
+              </div>
               <button
                 onClick={() => navigate('/profile')}
                 className="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors duration-300"

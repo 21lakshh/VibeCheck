@@ -1,6 +1,9 @@
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+
+// Use a single, consistent callback URL for production
 const REDIRECT_URI = 'https://vibe-check-jet-eight.vercel.app/callback';
+
 import { supabase } from './supabase.js'
 
 const SPOTIFY_SCOPES = [
