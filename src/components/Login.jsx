@@ -14,7 +14,7 @@ const Login = () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
+          redirectTo: 'https://vibe-check-jet-eight.vercel.app/auth/callback'
         }
       })
       if (error) {
