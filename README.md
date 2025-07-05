@@ -1,116 +1,221 @@
-# 🎧 VibeCheck
+# 🎵 VibeCheck
 
 **Every moment deserves its soundtrack.**  
-VibeCheck is a 1-tap music experience that detects your current location and weather, analyzes the mood using AI, and generates a Spotify playlist that perfectly matches your vibe.
+VibeCheck is your personal music companion that creates the perfect playlist based on your current mood, weather, and situation. Using AI-powered mood analysis and Spotify integration, it delivers a tailored music experience that matches your vibe.
 
----
+🌐 **[Live Demo](https://vibe-check-jet-eight.vercel.app/)**
 
-## 🚀 Features
+## 🤖 How It Works - The VibeCheck Flow
 
-- 🌍 Auto-detects your location (Geolocation API)
-- ☁️ Fetches real-time weather data (OpenWeatherMap API)
-- 🧠 Uses a Large Language Model (LLM) to analyze mood
-- 🎵 Generates Spotify playlists using Spotify Web API
-- 🛠 Built with React, TailwindCSS, and Supabase
+1. **Location & Weather Analysis** 🌍
+   - Select your location using our interactive map interface
+   - Real-time weather data is fetched using OpenWeatherMap API
+   - Weather conditions influence both UI aesthetics and music selection
 
----
+2. **Mood Selection** 🎭
+   - Choose your current emotional state
+   - Select additional situational context (e.g., studying, working out, relaxing)
+   - Dynamic UI adapts to your selections with weather-based animations
 
-## 🧠 How It Works
+3. **AI-Powered Music Analysis** 🧠
+   - Utilizes Groq LLM (Meta Llama 4 Scout) for intelligent music analysis
+   - Processes multiple factors:
+     - Current weather conditions
+     - Selected mood
+     - Situational context
+     - Time of day
+   - Generates contextually aware music recommendations
 
-1. User taps **"VIBE CHECK"**
-2. **Geolocation API** fetches location
-3. **OpenWeatherMap API** gets real-time weather
-4. **LLM** interprets mood from environment
-5. **Spotify Web API** plays a curated playlist
-6. Your surroundings are turned into music — instantly
+4. **Playlist Generation** 🎵
+   - AI suggests 10 perfectly matched songs
+   - One-click playlist creation in your Spotify account
+   - Songs are curated based on:
+     - Weather atmosphere
+     - Emotional resonance
+     - Activity compatibility
+     - Musical preferences
 
----
+## 🎨 Dynamic UI Features
 
-## 🛠 Tech Stack
+### Weather-Based Themes
+- **Rainy**: Animated rain drops with a cool, blue color palette
+- **Sunny**: Bright, warm animations with sun rays
+- **Cloudy**: Soft, moving cloud animations
 
-| Layer       | Tech Used               |
-|-------------|-------------------------|
-| Frontend    | React, TailwindCSS      |
-| Backend     | Supabase                |
-| APIs        | Geolocation, OpenWeatherMap, Spotify Web API |
-| AI          | LLM (for mood analysis) |
-
----
+### Mood-Responsive Design
+- Smooth transitions between different states
+- Interactive elements reflect current context
+- Ambient background animations
 
 ## 📸 Screenshots
 
-![image](https://github.com/user-attachments/assets/40d00391-f6cc-429b-97c9-6e301ec26dfc)
-![image](https://github.com/user-attachments/assets/59104122-c61e-41fd-a552-a4a1aa137b6a)
-![image](https://github.com/user-attachments/assets/ab4f2f9f-ac51-4d4b-9d52-02513f090006)
-![image](https://github.com/user-attachments/assets/911634ba-e4e1-4636-8cc1-503840d1fdd9)
-![image](https://github.com/user-attachments/assets/af57c69b-b3f6-4d4d-a82d-9ca182f0a1cd)
+### Landing Page
+![Landing Page](/public/ss1.jpg)
 
----
+### Authentication
+![Authentication](/public/ss2.jpg)
 
-## 🎵 Additional Features
+### Dashboard
+![Dashboard](/public/ss3.png)
 
-- **Spotify Integration**: Connect your Spotify account to share your music taste
-- **Mood-Based Recommendations**: Get personalized music recommendations based on your current mood
-- **Friend System**: Add friends and manage friend requests with a comprehensive status system
-- **Real-time Chat**: Chat with friends and share music recommendations
-- **Profile Management**: Customize your profile with top artists and songs
+### Profile View
+![Profile](/public/ss4.png)
 
----
+### Music Recommendations
+![Music Recommendations](/public/ss5.png)
 
-## 🎵 Friend Request System
+### Friend Activity
+![Friend Activity](/public/ss6.png)
 
-The platform includes a comprehensive friend request system with the following features:
+## 🛠️ Tech Stack
 
-### Friend Request Statuses
-- **Pending**: Friend request has been sent but not yet responded to
-- **Accepted**: Friend request has been accepted, users are now friends
-- **Rejected**: Friend request has been rejected and removed
-- **Cancelled**: Friend request has been withdrawn by the sender
+### Frontend
+- **Framework**: React with Vite
+- **Styling**: TailwindCSS
+- **State Management**: React Context
+- **Animations**: Framer Motion, GSAP
+- **Icons**: Lucide React, Tabler Icons
+- **Weather Animations**: Custom CSS and GSAP animations
 
-### User Actions
-- **Send Request**: Add friends by their email address
-- **Accept Request**: Accept incoming friend requests
-- **Reject Request**: Reject incoming friend requests
-- **Withdraw Request**: Cancel a sent friend request
-- **Remove Friend**: Remove an accepted friendship
+### Backend & Infrastructure
+- **Backend-as-a-Service**: Supabase
+- **Authentication**: Supabase Auth (Google OAuth)
+- **Database**: PostgreSQL (via Supabase)
+- **Hosting**: Vercel
+- **Real-time**: Supabase Real-time subscriptions
 
-### Status Indicators
-- **Friend**: Green badge for accepted friendships
-- **Request Sent**: Yellow badge for pending requests you sent
-- **Request Received**: Blue badge for pending requests you received
-- **Cancelled**: Gray badge for cancelled requests
+### AI & Machine Learning
+- **LLM Engine**: Groq
+- **Model**: Meta Llama 4 Scout
+- **Use Cases**:
+  - Music mood analysis
+  - Context-aware recommendations
+  - Weather-music correlation
+  - Situational playlist generation
 
----
+### External APIs
+- **Music**: Spotify Web API
+- **Weather**: OpenWeatherMap API
+- **Location**: Browser Geolocation API
+- **Maps**: Leaflet for location selection
 
-## 🛠 Database Schema
+## 🚀 Getting Started
 
-The application uses Supabase with the following key tables:
+### Prerequisites
+- Node.js (v16 or higher)
+- pnpm (recommended) or npm
+- Spotify Developer Account
+- Supabase Account
+- OpenWeatherMap API Key
 
-- **profiles**: User profile information
-- **friends**: Friend relationships with status tracking
-- **chat_rooms**: Chat room management
-- **chat_participants**: Chat room membership
-- **chat_messages**: Message storage
-
----
-
-## 🎵 Getting Started
-
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Set up your Supabase project and run the schema migration
-4. Configure environment variables
-5. Start the development server: `npm run dev`
-
----
-
-## 🎵 Environment Variables
-
-Create a `.env` file with the following variables:
-
-```
+### Environment Setup
+Create a `.env.local` file with:
+```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id
-VITE_SPOTIFY_REDIRECT_URI=your_spotify_redirect_uri
+VITE_SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+VITE_OPENWEATHER_API_KEY=your_openweather_api_key
 ```
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/21lakshh/VibeCheck.git
+   cd VibeCheck
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+
+### Supabase Setup
+1. Create a new Supabase project
+2. Run the database migrations:
+   ```sql
+   -- Run the SQL files in order:
+   1. database_migration.sql
+   2. supabase_chat_schema.sql
+   3. fix_rls_policies.sql
+   ```
+
+### Spotify Developer Setup
+1. Create a Spotify Developer application
+2. Add the following redirect URIs:
+   - `http://localhost:5173/callback` (development)
+   - `https://vibe-check-jet-eight.vercel.app/callback` (production)
+
+## 📱 Core Features
+
+### Authentication
+- Google OAuth via Supabase
+- Secure session management
+- Protected routes
+
+### Music Features
+- Mood-based playlist generation
+- Top tracks and artists display
+- Music sharing with friends
+- Playlist creation and management
+
+### Social Features
+- Friend system with request management
+- Real-time chat functionality
+- Music taste compatibility
+- Activity feed
+
+### Profile Management
+- Customizable user profiles
+- Music statistics
+- Listening history
+- Friend management
+
+## 🔐 Security Features
+
+- Secure authentication flow
+- Row Level Security (RLS) in Supabase
+- Protected API endpoints
+- Secure token management
+
+## 📦 Project Structure
+```
+VibeCheck/
+├── src/
+│   ├── components/    # React components
+│   ├── hooks/        # Custom React hooks
+│   ├── lib/          # Utility functions and API clients
+│   ├── pages/        # Page components
+│   └── Agents/       # AI-related functionality
+├── public/           # Static assets
+└── database/         # SQL migrations and schemas
+```
+
+## 🌟 Upcoming Features
+
+- [ ] Music mood analysis using machine learning
+- [ ] Group listening sessions
+- [ ] Advanced music recommendations
+- [ ] Custom playlist algorithms
+- [ ] Enhanced social features
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+For support, please open an issue in the GitHub repository or contact the maintainers.
+
+---
+
+Made with ❤️ by Unorthodox
