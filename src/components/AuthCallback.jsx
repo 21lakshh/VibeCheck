@@ -12,29 +12,39 @@ const AuthCallback = () => {
       try {
         setStatus('Processing authentication tokens...');
         
-        // Wait a moment for Supabase to process the URL hash
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // Log the current URL for debugging
+        console.log('Current URL:', window.location.href);
         
-        // Get the session from the URL hash
-        const { data: { session }, error } = await supabase.auth.getSession();
+        // Get the hash from the URL
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = hashParams.get('access_token');
         
-        if (error) {
-          console.error('Auth callback error:', error);
-          throw error;
+        if (accessToken) {
+          console.log('Found access token in URL');
+          setStatus('Access token found, getting session...');
+        }
+        
+        // Get the session
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) {
+          console.error('Session error:', sessionError);
+          throw sessionError;
         }
 
         if (session) {
           setStatus('Authentication successful! Redirecting...');
           console.log('User authenticated:', session.user.email);
           
-          // Clear the URL hash to clean up the URL
+          // Clear the URL hash
           window.history.replaceState(null, '', window.location.pathname);
           
-          // Redirect to home page after successful authentication
+          // Redirect to home page
           setTimeout(() => {
             navigate('/', { replace: true });
           }, 1000);
         } else {
+          console.log('No session found');
           setStatus('No session found, redirecting to login...');
           setTimeout(() => {
             navigate('/login', { replace: true });
@@ -71,6 +81,7 @@ const AuthCallback = () => {
           {error ? (
             <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 mb-6">
               <p className="text-red-300 text-sm">{error}</p>
+              <p className="text-gray-300 text-xs mt-2">URL: {window.location.href}</p>
             </div>
           ) : (
             <div className="flex items-center justify-center">
