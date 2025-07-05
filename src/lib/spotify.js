@@ -1,6 +1,6 @@
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
-const REDIRECT_URI = 'http://127.0.0.1:5173/callback';
+const REDIRECT_URI = 'https://vibe-check-jet-eight.vercel.app/callback';
 import { supabase } from './supabase.js'
 
 const SPOTIFY_SCOPES = [
